@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { Search } from "./pages/Search";
 import { Saved } from "./pages/Saved";
 import { Profile } from "./pages/Profile";
+import MovieDetails from "./pages/MovieDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
         </Routes>
 
         <Navigation />
