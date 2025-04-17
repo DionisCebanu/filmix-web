@@ -1,11 +1,13 @@
 import { TrendingMovie } from "../interfaces/interfaces";
 import { MovieDetails } from "../interfaces/interfaces";
+
+const apiKey = process.env.REACT_APP_MOVIE_API_KEY;
 export const TMDB_CONFIG = {
     BASE_URL: 'https://api.themoviedb.org/3',
-    API_KEY: process.env.EXPO_PUBLIC_MOVIE_API_KEY,
+    API_KEY: apiKey,
     headers: {
         accept: 'application/json',
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNWY3Y2RjZmNjNjI4MmY1ODlmNmZjMTUyZjBmNzJkMSIsIm5iZiI6MTc0NDcyODAzNC45NjUsInN1YiI6IjY3ZmU2ZmUyNDM3ZjBiODBlZWFkMzRmMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.83NllTgNiF3FvpuWXoQIcfaDdJaHCvZxXmdYwf6s4Qs`
+        Authorization: `Bearer ${apiKey}`,
     }
 }
 
