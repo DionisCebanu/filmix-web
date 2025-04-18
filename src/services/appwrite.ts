@@ -3,14 +3,14 @@ import { Movie } from "../interfaces/interfaces";
 import { TrendingMovie } from "../interfaces/interfaces";
 
 
-const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
-const COLLECTION_ID = process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_ID!;
-const USERS_COLLECTION = process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_USERS_ID!;
-const SAVED_MOVIES = process.env.EXPO_PUBLIC_APPWRITE_COLLECTION_SAVED_MOVIES_ID!;
+const DATABASE_ID = process.env.REACT_APP_APPWRITE_DATABASE_ID!;
+const COLLECTION_ID = process.env.REACT_APP_APPWRITE_COLLECTION_ID!;
+const USERS_COLLECTION = process.env.REACT_APP_APPWRITE_COLLECTION_USERS_ID!;
+const SAVED_MOVIES = process.env.REACT_APP_APPWRITE_COLLECTION_SAVED_MOVIES_ID!;
 
 const client = new Client()
   .setEndpoint("https://cloud.appwrite.io/v1")
-  .setProject(process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!);
+  .setProject(process.env.REACT_APP_APPWRITE_PROJECT_ID!);
   
 
 const database = new Databases(client);
