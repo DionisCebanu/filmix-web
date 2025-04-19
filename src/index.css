@@ -6,3 +6,9 @@
 body {
     background: linear-gradient(135deg, #0d1b2a, #1b2e51);
 }
+
+.structure {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+}

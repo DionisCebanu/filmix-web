@@ -6,6 +6,7 @@ import TrendingCard from "../components/TrendingCard";
 import { Movie, TrendingMovie } from "../interfaces/interfaces";
 import { getTrendingMovies } from "../services/appwrite";
 
+
 export default function Home() {
   const { data: movies, loading, error } = useFetch(() =>
     fetchMovies({ query: "" })
@@ -26,6 +27,8 @@ export default function Home() {
 
   return (
     <div className="p-5">
+
+
       {/* ✅ Trending Section */}
       <h1 className="text-white text-2xl font-bold mb-4">Trending Movies</h1>
       {loadingTrending ? (
