@@ -67,7 +67,7 @@ export const getTrendingMovies = async (): Promise<
 
 
 
-/* export const registerUser = async ({
+export const registerUser = async ({
   name,
   email,
   password,
@@ -81,22 +81,22 @@ export const getTrendingMovies = async (): Promise<
     email,
     password,
   });
-}; */
+};
 
 // Login
-/* export const loginUser = async (email: string, password: string) => {
+export const loginUser = async (email: string, password: string) => {
   const res = await database.listDocuments(DATABASE_ID, USERS_COLLECTION, [
     Query.equal("email", email),
     Query.equal("password", password),
   ]);
 
   return res.documents[0] || null;
-}; */
+};
 
 // Get current connected user
-/* export const getCurrentUser = async () => {
+export const getCurrentUser = async () => {
   try {
-    const userStr = await AsyncStorage.getItem("user");
+    const userStr = localStorage.getItem("user");
     if (!userStr) return null;
 
     const user = JSON.parse(userStr);
@@ -105,13 +105,13 @@ export const getTrendingMovies = async (): Promise<
     console.error("Failed to get current user:", error);
     return null;
   }
-}
+};
+
 
 // ✅ Log out
-const handleLogout = async () => {
-  await AsyncStorage.removeItem("user");
-  
-}; */
+export const handleLogout = async () => {
+  localStorage.removeItem("user");
+};
 
 
 
