@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchMovieDetails } from "../services/api";
 import { MovieDetails as MovieDetailsType } from "../interfaces/interfaces"; // if declared
+import { saveMovie } from "../services/appwrite";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -30,6 +31,8 @@ const MovieDetails = () => {
         ← Go back
       </button>
 
+     
+
       <div className="flex flex-col md:flex-row gap-6">
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -57,6 +60,21 @@ const MovieDetails = () => {
               <strong>Production:</strong>{" "}
               {movie.production_companies?.map((c) => c.name).join(", ") || "N/A"}
             </p>
+            <button
+              onClick={() => {
+                saveMovie({
+                  id: movie.id,
+                  title: movie.title ?? "Untitled",
+                  poster_path: movie.poster_path ?? "",
+                  // Fill other required `Movie` fields if necessary
+                } as any).then(() => {
+                  alert(`${movie.title} added to your saved list!`);
+                });
+              }}
+                className="bg-blue-500 text-white px-5 py-2 rounded mt-6"
+            >
+              Save Movie
+            </button>
           </div>
         </div>
       </div>

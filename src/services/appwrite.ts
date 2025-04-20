@@ -1,7 +1,7 @@
 import { Client, Databases, ID, Query, Account } from "appwrite";
 import { Movie } from "../interfaces/interfaces";
-import { TrendingMovie } from "../interfaces/interfaces";
-
+import { TrendingMovie, MovieDetails } from "../interfaces/interfaces";
+import { log } from "console";
 
 const DATABASE_ID = process.env.REACT_APP_APPWRITE_DATABASE_ID!;
 const COLLECTION_ID = process.env.REACT_APP_APPWRITE_COLLECTION_ID!;
@@ -148,6 +148,39 @@ export const handleLogout = async () => {
   }
 }; */
 
+// Add the Movie to the saved list
+export const saveMovie = async (movie: MovieDetails) => {
+  try {
+    const userStr = localStorage.getItem("user");
+    if (!userStr) throw new Error("User not logged in.");
+
+    const user = JSON.parse(userStr);
+    const userId = user.$id;
+
+    const result = await database.listDocuments(DATABASE_ID, SAVED_MOVIES, [
+      Query.equal("user_id", userId),
+      Query.equal("movie_id", String(movie.id)),
+    ]);
+
+    if (result.documents.length > 0) {
+      console.log("Movie already saved.");
+      return;
+    }
+
+    await database.createDocument(DATABASE_ID, SAVED_MOVIES, ID.unique(), {
+      user_id: userId,
+      movie_id: String(movie.id),
+      title: movie.title ?? "Untitled",
+      poster_url: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : "",
+    });
+
+    console.log(" Movie saved");
+  } catch (error) {
+    console.error(" Failed to save movie:", error);
+  }
+};
 // Get Saved movies
 
 export const getSavedMovies = async () => {
