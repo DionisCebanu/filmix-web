@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { registerUser } from "../services/appwrite";
+import { showAlert } from "../utils/alert";
 
 interface Props {
   onRegisterSuccess: () => void;
@@ -22,17 +23,17 @@ export default function CreateUser({ onRegisterSuccess }: Props) {
     const { name, email, password } = form;
 
     if (!name || !email || !password) {
-      alert("All fields are required.");
+      showAlert("All fields are required.", "error");
       return;
     }
 
     try {
       await registerUser({ name, email, password });
-      alert("Account created! You can now log in.");
+      showAlert(`Account created! You can now log in.`);
       setForm({ name: "", email: "", password: "" });
       onRegisterSuccess();
     } catch (error) {
-      alert("Something went wrong during registration.");
+      showAlert("Something went wrong during registration.", "error");
     }
   };
 

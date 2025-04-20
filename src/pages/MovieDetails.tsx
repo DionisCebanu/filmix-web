@@ -4,6 +4,7 @@ import { fetchMovieDetails } from "../services/api";
 import { MovieDetails as MovieDetailsType } from "../interfaces/interfaces"; // if declared
 import { saveMovie, getSavedMovies } from "../services/appwrite";
 import { removeMovie } from "../services/appwrite";
+import { showAlert } from "../utils/alert";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -32,7 +33,8 @@ const MovieDetails = () => {
   //Remove movie from the saved list
   const handleRemove = async () => {
     await removeMovie(movie!.id);
-    alert(`${movie!.title} removed from saved list.`);
+    /* alert(`${movie!.title} removed from saved list.`); */
+    showAlert(`${movie!.title} removed from saved list.`);
     setAlreadySaved(false);
   };
 
@@ -88,7 +90,8 @@ const MovieDetails = () => {
               <button
                 onClick={() => {
                   saveMovie(movie).then(() => {
-                    alert(`${movie.title} added to your saved list!`);
+                    /* alert(`${movie.title} added to your saved list!`); */
+                    showAlert(`${movie.title} added to your saved list!`)
                     setAlreadySaved(true); // Update UI
                   });
                 }}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loginUser } from "../services/appwrite";
+import { showAlert } from "../utils/alert";
 
 interface Props {
   onLoginSuccess: (user: any) => void;
@@ -15,11 +16,11 @@ export default function LoginUser({ onLoginSuccess }: Props) {
     const user = await loginUser(email, password);
 
     if (user) {
-      alert(`Welcome, ${user.name}`);
+      showAlert(`Welcome, ${user.name}`);
       localStorage.setItem("user", JSON.stringify(user));
       onLoginSuccess(user);
     } else {
-      alert("Invalid email or password.");
+      showAlert("Invalid email or password.", "error");
     }
   };
 

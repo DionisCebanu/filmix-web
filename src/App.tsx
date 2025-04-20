@@ -7,12 +7,14 @@ import Search from "./pages/Search";
 import Saved from "./pages/Saved";
 import Profile from "./pages/Profile";
 import MovieDetails from "./pages/MovieDetails";
+import AlertPortal from "./utils/alert";
 
 function App() {
   return (
     <Router>
       <section className="structure">
         <div className="pb-20 bg-primary min-h-screen">
+        <AlertPortal />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />

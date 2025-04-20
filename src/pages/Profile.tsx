@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CreateUser from "../components/CreateUser";
 import LoginUser from "../components/LoginUser";
 import { getCurrentUser } from "../services/appwrite";
+import { showAlert } from "../utils/alert";
 
 export default function Profile() {
   const [user, setUser] = useState<any>(null);
@@ -16,7 +17,7 @@ export default function Profile() {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
-    alert("You have been logged out.");
+    showAlert("You have been logged out.");
   };
 
   return (
