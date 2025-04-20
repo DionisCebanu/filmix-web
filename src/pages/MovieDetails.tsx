@@ -2,22 +2,36 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchMovieDetails } from "../services/api";
 import { MovieDetails as MovieDetailsType } from "../interfaces/interfaces"; // if declared
-import { saveMovie } from "../services/appwrite";
+import { saveMovie, getSavedMovies } from "../services/appwrite";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [alreadySaved, setAlreadySaved] = useState(false);
 
   useEffect(() => {
     if (!id) return;
 
-    fetchMovieDetails(id)
-      .then(setMovie)
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
+    const loadMovie = async () => {
+      const details = await fetchMovieDetails(id);
+      setMovie(details);
+
+      const saved = await getSavedMovies();
+      const isSaved = saved.some((m) => String(m.movie_id) === String(id));
+      setAlreadySaved(isSaved);
+
+      setLoading(false);
+    };
+
+    loadMovie();
   }, [id]);
+
+  const handleRemove = () => {
+    // To be implemented
+    console.log("Remove logic will go here.");
+  };
 
   if (loading) return <div className="text-white text-center mt-10">Loading...</div>;
   if (!movie) return <div className="text-red-500 text-center mt-10">Movie not found.</div>;
@@ -60,21 +74,26 @@ const MovieDetails = () => {
               <strong>Production:</strong>{" "}
               {movie.production_companies?.map((c) => c.name).join(", ") || "N/A"}
             </p>
+            {alreadySaved ? (
             <button
-              onClick={() => {
-                saveMovie({
-                  id: movie.id,
-                  title: movie.title ?? "Untitled",
-                  poster_path: movie.poster_path ?? "",
-                  // Fill other required `Movie` fields if necessary
-                } as any).then(() => {
-                  alert(`${movie.title} added to your saved list!`);
-                });
-              }}
+                onClick={handleRemove}
+                className="bg-red-600 text-white px-5 py-2 rounded mt-6"
+              >
+                Remove from Saved
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  saveMovie(movie).then(() => {
+                    alert(`${movie.title} added to your saved list!`);
+                    setAlreadySaved(true); // Update UI
+                  });
+                }}
                 className="bg-blue-500 text-white px-5 py-2 rounded mt-6"
-            >
-              Save Movie
-            </button>
+              >
+                Save Movie
+              </button>
+            )}
           </div>
         </div>
       </div>
