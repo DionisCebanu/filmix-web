@@ -114,40 +114,6 @@ export const handleLogout = async () => {
 };
 
 
-
-// Get the saved movies list
-/* export const saveMovie = async (movie: Movie) => {
-  try {
-    const userStr = await AsyncStorage.getItem("user");
-    if (!userStr) throw new Error("User not logged in.");
-
-    const user = JSON.parse(userStr);
-    const userId = user.$id;
-
-    // Prevent duplicates
-    const result = await database.listDocuments(DATABASE_ID, SAVED_MOVIES, [
-      Query.equal("user_id", userId),
-      Query.equal("movie_id", String(movie.id)),
-    ]);
-
-    if (result.documents.length > 0) {
-      console.log("Movie already saved.");
-      return;
-    }
-
-    await database.createDocument(DATABASE_ID, SAVED_MOVIES, ID.unique(), {
-      user_id: userId,
-      movie_id: String(movie.id),
-      title: movie.title,
-      poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-    });
-
-    console.log("Movie saved!");
-  } catch (error) {
-    console.error("Failed to save movie:", error);
-  }
-}; */
-
 // Add the Movie to the saved list
 export const saveMovie = async (movie: MovieDetails) => {
   try {
@@ -200,5 +166,34 @@ export const getSavedMovies = async () => {
   } catch (error) {
     console.error("Error fetching saved movies:", error);
     return [];
+  }
+};
+
+// Remove saved Movies
+export const removeMovie = async (movieId: string | number) => {
+  try {
+    const userStr = localStorage.getItem("user");
+    if (!userStr) throw new Error("User not logged in.");
+
+    const user = JSON.parse(userStr);
+    const userId = user.$id;
+
+    // Find the saved document ID to delete
+    const result = await database.listDocuments(DATABASE_ID, SAVED_MOVIES, [
+      Query.equal("user_id", userId),
+      Query.equal("movie_id", String(movieId)),
+    ]);
+
+    if (result.documents.length === 0) {
+      console.log("Movie not found in saved list.");
+      return;
+    }
+
+    const docId = result.documents[0].$id;
+
+    await database.deleteDocument(DATABASE_ID, SAVED_MOVIES, docId);
+    console.log(" Movie removed from saved list.");
+  } catch (error) {
+    console.error(" Failed to remove movie:", error);
   }
 };

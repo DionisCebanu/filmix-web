@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchMovieDetails } from "../services/api";
 import { MovieDetails as MovieDetailsType } from "../interfaces/interfaces"; // if declared
 import { saveMovie, getSavedMovies } from "../services/appwrite";
+import { removeMovie } from "../services/appwrite";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -28,9 +29,11 @@ const MovieDetails = () => {
     loadMovie();
   }, [id]);
 
-  const handleRemove = () => {
-    // To be implemented
-    console.log("Remove logic will go here.");
+  //Remove movie from the saved list
+  const handleRemove = async () => {
+    await removeMovie(movie!.id);
+    alert(`${movie!.title} removed from saved list.`);
+    setAlreadySaved(false);
   };
 
   if (loading) return <div className="text-white text-center mt-10">Loading...</div>;
