@@ -150,9 +150,9 @@ export const handleLogout = async () => {
 
 // Get Saved movies
 
-/* export const getSavedMovies = async () => {
+export const getSavedMovies = async () => {
   try {
-    const userStr = await AsyncStorage.getItem("user");
+    const userStr = localStorage.getItem("user");
     if (!userStr) throw new Error("User not logged in");
 
     const user = JSON.parse(userStr);
@@ -168,4 +168,4 @@ export const handleLogout = async () => {
     console.error("Error fetching saved movies:", error);
     return [];
   }
-}; */
+};

@@ -4,7 +4,7 @@ import Navigation from "./components/Navigation";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import { Saved } from "./pages/Saved";
+import Saved from "./pages/Saved";
 import Profile from "./pages/Profile";
 import MovieDetails from "./pages/MovieDetails";
 
