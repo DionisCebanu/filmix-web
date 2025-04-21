@@ -31,25 +31,33 @@ export default function Home() {
 
 
       {/* Trending Section */}
-      <h1 className="text-white text-2xl font-bold mb-4">Trending Movies</h1>
-      {loadingTrending ? (
-          <p className="text-gray-300">Loading trending movies...</p>
-        ) : trending.length === 0 ? (
-          <p className="text-gray-500">No trending movies found.</p>
-        ) : (
-          <TrendingSlider movies={trending} />
-        )}
+      <section className="structure">
+        <h1 className="text-white text-2xl font-bold mb-4">Trending Movies</h1>
+      </section>
+      <section className="structure">
+        {loadingTrending ? (
+            <p className="text-gray-300">Loading trending movies...</p>
+          ) : trending.length === 0 ? (
+            <p className="text-gray-500">No trending movies found.</p>
+          ) : (
+            <TrendingSlider movies={trending} />
+          )}
+      </section>
 
       {/* ✅ Latest Section */}
-      <h1 className="text-white text-2xl font-bold mt-10 mb-4">Latest Movies</h1>
-      {loading && <p className="text-gray-300">Loading latest movies...</p>}
-      {error && <p className="text-red-500">Error: {error.message}</p>}
+      <section className="structure">
+        <h1 className="text-white text-2xl font-bold mt-10 mb-4">Latest Movies</h1>
+        {loading && <p className="text-gray-300">Loading latest movies...</p>}
+        {error && <p className="text-red-500">Error: {error.message}</p>}
+      </section>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-        {movies?.map((movie: Movie) => (
-          <MovieCard key={movie.id} {...movie} />
-        ))}
-      </div>
+      <section className="structure">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+          {movies?.map((movie: Movie) => (
+            <MovieCard key={movie.id} {...movie} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

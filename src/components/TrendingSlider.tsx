@@ -47,7 +47,7 @@ const TrendingSlider: React.FC<Props> = ({ movies, title }) => {
           {movies.map((movie, index) => (
             <div
               key={movie.movie_id}
-              className="flex-shrink-0 w-1/3 sm:w-1/4 xl:w-1/5"
+              className="flex-shrink-0 w-1/3 md:w-1/5"
             >
               <TrendingCard movie={movie} index={index} />
             </div>

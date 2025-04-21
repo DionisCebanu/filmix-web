@@ -12,7 +12,7 @@ import AlertPortal from "./utils/alert";
 function App() {
   return (
     <Router>
-      <section className="structure">
+      
         <div className="pb-20 bg-primary min-h-screen">
         <AlertPortal />
           <Routes>
@@ -24,7 +24,6 @@ function App() {
           </Routes>
           <Navigation />
         </div>
-      </section>
   </Router>
   );
 }

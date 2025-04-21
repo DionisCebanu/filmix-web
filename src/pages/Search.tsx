@@ -37,35 +37,32 @@ export default function Search() {
   }, [searchQuery]);
 
   return (
-    <div className="px-5 py-10 bg-primary min-h-screen text-white">
-      <h1 className="text-2xl font-bold mb-6">Search Movies</h1>
-
-      <SearchBar
-        placeholder="Search for a movie"
-        value={searchQuery}
-        onChange={(text) => setSearchQuery(text)}
-      />
-
-      {loading && <p className="text-gray-400 mt-4">Loading...</p>}
-      {error && (
-        <p className="text-red-500 mt-4">Error: {error.message}</p>
-      )}
-
-      {!loading && !error && searchQuery.trim() && movies.length > 0 && (
-        <p className="text-accent mt-4 font-medium">
-          Search Results for <strong>{searchQuery}</strong>
-        </p>
-      )}
-
-      {!loading && !error && searchQuery.trim() && movies.length === 0 && (
-        <p className="text-gray-500 mt-6">No movies found.</p>
-      )}
-
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} {...movie} />
-        ))}
+    <section className="structure">
+      <div className="px-5 py-10 bg-primary min-h-screen text-white">
+        <h1 className="text-2xl font-bold mb-6">Search Movies</h1>
+        <SearchBar
+          placeholder="Search for a movie"
+          value={searchQuery}
+          onChange={(text) => setSearchQuery(text)}
+        />
+        {loading && <p className="text-gray-400 mt-4">Loading...</p>}
+        {error && (
+          <p className="text-red-500 mt-4">Error: {error.message}</p>
+        )}
+        {!loading && !error && searchQuery.trim() && movies.length > 0 && (
+          <p className="text-accent mt-4 font-medium">
+            Search Results for <strong>{searchQuery}</strong>
+          </p>
+        )}
+        {!loading && !error && searchQuery.trim() && movies.length === 0 && (
+          <p className="text-gray-500 mt-6">No movies found.</p>
+        )}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} {...movie} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
