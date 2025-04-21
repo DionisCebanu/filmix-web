@@ -5,6 +5,7 @@ import MovieCard from "../components/MovieCard";
 import TrendingCard from "../components/TrendingCard";
 import { Movie, TrendingMovie } from "../interfaces/interfaces";
 import { getTrendingMovies } from "../services/appwrite";
+import TrendingSlider from "../components/TrendingSlider";
 
 
 export default function Home() {
@@ -29,26 +30,22 @@ export default function Home() {
     <div className="p-5">
 
 
-      {/* ✅ Trending Section */}
+      {/* Trending Section */}
       <h1 className="text-white text-2xl font-bold mb-4">Trending Movies</h1>
       {loadingTrending ? (
-        <p className="text-gray-300">Loading trending movies...</p>
-      ) : trending.length === 0 ? (
-        <p className="text-gray-500">No trending movies found.</p>
-      ) : (
-        <div className="flex gap-5 overflow-x-auto pb-6">
-          {trending.map((movie, index) => (
-            <TrendingCard key={movie.movie_id} movie={movie} index={index} />
-          ))}
-        </div>
-      )}
+          <p className="text-gray-300">Loading trending movies...</p>
+        ) : trending.length === 0 ? (
+          <p className="text-gray-500">No trending movies found.</p>
+        ) : (
+          <TrendingSlider movies={trending} />
+        )}
 
       {/* ✅ Latest Section */}
       <h1 className="text-white text-2xl font-bold mt-10 mb-4">Latest Movies</h1>
       {loading && <p className="text-gray-300">Loading latest movies...</p>}
       {error && <p className="text-red-500">Error: {error.message}</p>}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {movies?.map((movie: Movie) => (
           <MovieCard key={movie.id} {...movie} />
         ))}

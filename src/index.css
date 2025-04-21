@@ -30,3 +30,13 @@ body {
     animation: fade-slide-in 2.4s ease-out;
   }
   
+
+/* Scroll for the slider */
+.scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  

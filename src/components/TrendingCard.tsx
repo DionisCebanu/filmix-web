@@ -9,7 +9,7 @@ interface Props {
 
 const TrendingCard: React.FC<Props> = ({ movie, index }) => {
   return (
-    <Link to={`/movie/${movie.movie_id}`} className="w-32 shrink-0">
+    <Link to={`/movie/${movie.movie_id}`} className="flex-1 min-w-0">
       <div className="relative">
         <img
           src={movie.poster_url}
