@@ -6,6 +6,8 @@ import TrendingCard from "../components/TrendingCard";
 import { Movie, TrendingMovie } from "../interfaces/interfaces";
 import { getTrendingMovies } from "../services/appwrite";
 import TrendingSlider from "../components/TrendingSlider";
+import SearchBar from "../components/SearchBar";
+import { Link } from "react-router-dom";
 
 
 export default function Home() {
@@ -29,9 +31,17 @@ export default function Home() {
   return (
     <div className="p-5">
 
-
-      {/* Trending Section */}
+      
       <section className="structure">
+      {/*Search component */}
+        <Link to="/search" className="block">
+          <SearchBar
+            placeholder="Search for a movie..."
+            value=""
+            onChange={() => {}}
+          />
+        </Link>
+        {/* Trending Section */}
         <h1 className="text-white text-2xl font-bold mb-4">Trending Movies</h1>
       </section>
       <section className="structure">
@@ -42,16 +52,14 @@ export default function Home() {
           ) : (
             <TrendingSlider movies={trending} />
           )}
-      </section>
 
-      {/* ✅ Latest Section */}
-      <section className="structure">
+          
+        {/* ✅ Latest Section */}
+        {/* ✅ Latest Title */}
         <h1 className="text-white text-2xl font-bold mt-10 mb-4">Latest Movies</h1>
         {loading && <p className="text-gray-300">Loading latest movies...</p>}
         {error && <p className="text-red-500">Error: {error.message}</p>}
-      </section>
-
-      <section className="structure">
+        {/* ✅ Latest Card List */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
           {movies?.map((movie: Movie) => (
             <MovieCard key={movie.id} {...movie} />

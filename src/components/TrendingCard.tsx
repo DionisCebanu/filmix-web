@@ -10,7 +10,7 @@ interface Props {
 const TrendingCard: React.FC<Props> = ({ movie, index }) => {
   return (
     <Link to={`/movie/${movie.movie_id}`} className="flex-1 min-w-0">
-      <div className="relative">
+      <div className="relative transform transition-transform duration-200 hover:scale-[1.01]">
         <img
           src={movie.poster_url}
           alt={movie.title}

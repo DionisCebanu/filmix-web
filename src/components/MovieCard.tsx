@@ -5,7 +5,7 @@ const MovieCard = ({ id, poster_path, title, vote_average, release_date }: Parti
   return (
     
       <Link to={`/movie/${id}`}>
-        <div className="w-full">
+        <div className="w-full transform transition-transform duration-200 hover:scale-[1.03]">
           <img
             src={
               poster_path
