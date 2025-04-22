@@ -38,7 +38,7 @@ export default function Search() {
 
   return (
     <section className="structure">
-      <div className="px-5 py-10 bg-primary min-h-screen text-white">
+      <div className="px-5 py-10 min-h-screen text-white">
         <header className="mx-auto max-w-xl">
           <h1 className="text-2xl font-bold mb-6">Search Movies</h1>
           <SearchBar

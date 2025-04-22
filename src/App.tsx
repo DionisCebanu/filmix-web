@@ -13,7 +13,10 @@ function App() {
   return (
     <Router>
       
-        <div className="pb-20 bg-primary min-h-screen">
+        <div 
+            className="pb-20 bg-cover bg-center "
+            style={{ backgroundImage: `url('/images/bg.png')` }}
+        >
         <AlertPortal />
           <Routes>
             <Route path="/" element={<Home />} />
