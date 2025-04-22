@@ -12,19 +12,28 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
   const [alreadySaved, setAlreadySaved] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     if (!id) return;
+    const userStr = localStorage.getItem("user");
+    setIsLoggedIn(!!userStr);
 
     const loadMovie = async () => {
-      const details = await fetchMovieDetails(id);
-      setMovie(details);
-
-      const saved = await getSavedMovies();
-      const isSaved = saved.some((m) => String(m.movie_id) === String(id));
-      setAlreadySaved(isSaved);
-
-      setLoading(false);
+      try {
+        const details = await fetchMovieDetails(id);
+        setMovie(details);
+  
+        if (userStr) {
+          const saved = await getSavedMovies();
+          const isSaved = saved.some((m) => String(m.movie_id) === String(id));
+          setAlreadySaved(isSaved);
+        }
+      } catch (error) {
+        console.error("Failed to load movie", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadMovie();
@@ -79,27 +88,30 @@ const MovieDetails = () => {
               <strong>Production:</strong>{" "}
               {movie.production_companies?.map((c) => c.name).join(", ") || "N/A"}
             </p>
-            {alreadySaved ? (
-            <button
-                onClick={handleRemove}
-                className="bg-red-600 text-white px-5 py-2 rounded mt-6"
-              >
-                Remove from Saved
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  saveMovie(movie).then(() => {
-                    /* alert(`${movie.title} added to your saved list!`); */
-                    showAlert(`${movie.title} added to your saved list!`)
-                    setAlreadySaved(true); // Update UI
-                  });
-                }}
-                className="bg-blue-500 text-white px-5 py-2 rounded mt-6"
-              >
-                Save Movie
-              </button>
+
+            {isLoggedIn && (
+              alreadySaved ? (
+                <button
+                  onClick={handleRemove}
+                  className="bg-red-600 text-white px-5 py-2 rounded mt-6"
+                >
+                  Remove from Saved
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    saveMovie(movie).then(() => {
+                      showAlert(`${movie.title} added to your saved list!`);
+                      setAlreadySaved(true);
+                    });
+                  }}
+                  className="bg-blue-500 text-white px-5 py-2 rounded mt-6"
+                >
+                  Save Movie
+                </button>
+              )
             )}
+
           </div>
         </div>
       </div>
