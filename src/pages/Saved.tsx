@@ -51,7 +51,10 @@ export default function Saved() {
   
   return (
     <section className="structure">
-      <div className="min-h-screen text-white px-5 py-10">
+      <header className="logo-header">
+            <img src="/images/logo-filmix.png" alt="filmix logo" />
+      </header> 
+      <div className="min-h-screen text-white">
       <h1 className="title text-center">Saved Movies</h1>
       {loading ? (
         <p className="text-gray-400">Loading...</p>

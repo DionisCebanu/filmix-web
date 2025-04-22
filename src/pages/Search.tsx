@@ -38,6 +38,9 @@ export default function Search() {
 
   return (
     <section className="structure">
+      <header className="logo-header">
+          <img src="/images/logo-filmix.png" alt="filmix logo" />
+      </header> 
       <div className="px-5 py-10 min-h-screen text-white">
         <header className="mx-auto max-w-xl">
           <h1 className="title">Search Movies</h1>
