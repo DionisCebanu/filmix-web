@@ -20,6 +20,7 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
   try {
     const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
       Query.equal("searchTerm", query),
+      Query.equal("movie_id", String(movie.id)), // ✅ cast to string
     ]);
 
     if (result.documents.length > 0) {
@@ -35,7 +36,7 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
     } else {
       await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
         searchTerm: query,
-        movie_id: movie.id,
+        movie_id: String(movie.id), // ✅ ensure consistent type
         title: movie.title,
         count: 1,
         poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
