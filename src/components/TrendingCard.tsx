@@ -14,7 +14,7 @@ const TrendingCard: React.FC<Props> = ({ movie, index }) => {
         <img
           src={movie.poster_url}
           alt={movie.title}
-          className="w-full h-52 rounded-lg object-cover shadow-lg"
+          className="w-full h-[150px] sm:h-52 rounded-lg object-cover shadow-lg"
         />
 
         {/* Index badge */}
