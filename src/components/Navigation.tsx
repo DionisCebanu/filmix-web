@@ -24,7 +24,9 @@ const Navigation = () => {
           to={tab.path}
           className={({ isActive }) =>
             `flex flex-col items-center text-sm font-medium p-2 transition-colors ${
-              isActive ? "text-accent" : "text-white hover:text-accent"
+              isActive 
+                ? "text-accent bg-[#e9e9e9] rounded-[17px] px-[10px] justify-center"
+                : "text-white hover:text-accent"
             }`
           }
         >
