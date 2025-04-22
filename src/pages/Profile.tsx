@@ -22,7 +22,7 @@ export default function Profile() {
 
   return (
     <div className="bg-primary min-h-screen flex flex-col items-center justify-center px-4 py-12 text-white ">
-      <h1 className="text-xl font-bold mb-6">Profile</h1>
+      <h1 className="title">Profile</h1>
 
       {user ? (
         <div className="bg-white/5 p-6 rounded-xl w-full max-w-md shadow-md space-y-4 text-center">

@@ -42,7 +42,7 @@ const TrendingSlider: React.FC<Props> = ({ movies, title }) => {
         {/* Cards container */}
         <div
           ref={sliderRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-8"
+          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
         >
           {movies.map((movie, index) => (
             <section

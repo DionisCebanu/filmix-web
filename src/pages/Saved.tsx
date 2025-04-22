@@ -52,7 +52,7 @@ export default function Saved() {
   return (
     <section className="structure">
       <div className="min-h-screen text-white px-5 py-10">
-      <h1 className="text-2xl font-bold mb-6 text-center">Saved Movies</h1>
+      <h1 className="title text-center">Saved Movies</h1>
       {loading ? (
         <p className="text-gray-400">Loading...</p>
       ) : !isLoggedIn ? (

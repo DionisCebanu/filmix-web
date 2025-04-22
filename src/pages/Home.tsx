@@ -42,7 +42,7 @@ export default function Home() {
           />
         </Link>
         {/* Trending Section */}
-        <h1 className="text-white text-2xl font-bold mb-4">Trending Movies</h1>
+        <h1 className="title">Trending Movies</h1>
       </section>
       <section className="structure">
         {loadingTrending ? (
@@ -56,7 +56,7 @@ export default function Home() {
           
         {/* ✅ Latest Section */}
         {/* ✅ Latest Title */}
-        <h1 className="text-white text-2xl font-bold mt-10 mb-4">Latest Movies</h1>
+        <h1 className="title">Latest Movies</h1>
         {loading && <p className="text-gray-300">Loading latest movies...</p>}
         {error && <p className="text-red-500">Error: {error.message}</p>}
         {/* ✅ Latest Card List */}

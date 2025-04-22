@@ -3,42 +3,4 @@
 @tailwind utilities;
 
 
-body {
-    background: linear-gradient(135deg, #0d1b2a, #1b2e51);
-}
-
-.structure {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-    width: 80%;
-    margin: 0 auto;
-}
-
-
-@keyframes fade-slide-in {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -20%);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(-50%, 0%);
-    }
-  }
-  
-  .animate-fade-slide-in {
-    animation: fade-slide-in 2.4s ease-out;
-  }
-  
-
-/* Scroll for the slider */
-.scrollbar-hide {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  
+@import url(styles/styles.css);
