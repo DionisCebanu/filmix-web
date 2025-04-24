@@ -9,8 +9,8 @@ interface Props {
 
 const TrendingCard: React.FC<Props> = ({ movie, index }) => {
   return (
-    <Link to={`/movie/${movie.movie_id}`} className="flex-1 min-w-0">
-      <div className="card relative transform transition-transform duration-200 hover:scale-[1.01]">
+    <Link to={`/movie/${movie.movie_id}`} className="card flex-1 min-w-0">
+      <div className=" relative transform transition-transform duration-200 hover:scale-[1.01]">
         <img
           src={movie.poster_url}
           alt={movie.title}
@@ -22,10 +22,10 @@ const TrendingCard: React.FC<Props> = ({ movie, index }) => {
           <span className="text-white font-bold text-xl">{index + 1}</span>
         </div>
       </div>
-
       <p className="text-sm font-semibold mt-2 text-white truncate">
         {movie.title}
       </p>
+
     </Link>
   );
 };
