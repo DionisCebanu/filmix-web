@@ -1,0 +1,18 @@
+:root {
+    --accent-btn: rgb(171 139 255);
+}
+.btn {
+    padding: 10px;
+    animation: all 1s;
+    background-color: var(--accent-btn);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.btn-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
