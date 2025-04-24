@@ -37,4 +37,5 @@ body {
     width: 100px;
     height: 100px;
     object-fit: cover;
+    animation: fadeIn 2s ease-in-out;
 }
