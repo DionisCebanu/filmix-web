@@ -2,18 +2,7 @@
 @import url(sections/sections.css);
 @import url(components/components.css);
 
-body {
-    background: linear-gradient(135deg, #0d1b2a, #1b2e51);
-}
 
-.structure {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-    width: 80%;
-    margin: 0 auto;
-}
 
 
 @keyframes fade-slide-in {

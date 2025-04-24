@@ -55,7 +55,7 @@ export default function Saved() {
             <img src="/images/logo-filmix.png" alt="filmix logo" />
       </header> 
       <div className="min-h-screen text-white">
-      <h1 className="title text-center">Saved Movies</h1>
+      <h1 className="title text-center mb-10">Saved Movies</h1>
       {loading ? (
         <p className="text-gray-400">Loading...</p>
       ) : !isLoggedIn ? (

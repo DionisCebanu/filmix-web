@@ -21,7 +21,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="bg-primary min-h-screen flex flex-col items-center justify-center px-4 py-12 text-white ">
+    <div className="bg-primary sm:min-h-screen flex flex-col items-center justify-center px-4 py-12 text-white ">
       <header className="logo-header">
           <img src="/images/logo-filmix.png" alt="filmix logo" />
       </header> 
