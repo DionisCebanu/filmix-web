@@ -11,7 +11,7 @@ interface Props {
 
 const SearchBar: React.FC<Props> = ({ placeholder, value, onChange, onSubmit }) => {
   return (
-    <div className="flex items-center bg-dark-200 rounded-full px-5 py-3 focus-within:ring-2 ring-accent w-full lg:w-[500px]">
+    <div className="flex items-center bg-dark-200 rounded-full px-5 py-3 focus-within:ring-2 ring-accent w-full lg:w-[500px] mx-auto">
       
       <input
         type="text"
