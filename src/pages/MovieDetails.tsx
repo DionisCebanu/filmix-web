@@ -51,8 +51,8 @@ const MovieDetails = () => {
   if (!movie) return <div className="text-red-500 text-center mt-10">Movie not found.</div>;
 
   return (
-    <section className="min-h-screen">
-      <div className="text-white p-6 max-w-5xl mx-auto">
+    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-10">
+      <div className="text-white p-6 max-w-5xl mx-auto bg-blue-500/10 rounded-[10px]">
         <button
           onClick={() => navigate(-1)}
           className="btn btn-icon mb-5 w-full sm:w-60"
@@ -60,7 +60,9 @@ const MovieDetails = () => {
           ← Go back
         </button>
       
-        <div className="flex flex-col md:flex-row gap-6">
+        <div 
+          className="flex flex-col md:flex-row gap-6 "
+        >
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
