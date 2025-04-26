@@ -1,5 +1,5 @@
 import { TrendingMovie } from "../interfaces/interfaces";
-import { MovieDetails } from "../interfaces/interfaces";
+import { MovieDetails, MovieVideo } from "../interfaces/interfaces";
 
 const apiKey = process.env.REACT_APP_MOVIE_API_KEY;
 export const TMDB_CONFIG = {
@@ -55,5 +55,31 @@ export const fetchMovieDetails = async (
   } catch (error) {
     console.error("Error fetching movie details:", error);
     throw error;
+  }
+};
+
+
+/**
+ * Fetch the Video of the Movie
+ */
+export const fetchMovieVideos = async (movieId: string): Promise<MovieVideo[]> => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${TMDB_CONFIG.API_KEY}`,
+      {
+        method: "GET",
+        headers: TMDB_CONFIG.headers,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch movie videos: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.results as MovieVideo[];
+  } catch (error) {
+    console.error("Error fetching movie videos:", error);
+    return [];
   }
 };

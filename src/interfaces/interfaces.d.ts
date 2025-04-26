@@ -70,6 +70,20 @@ export interface TrendingMovie {
     vote_average: number;
     vote_count: number;
   }
+
+  export interface MovieVideo {
+    id: string;
+    iso_639_1: string;
+    iso_3166_1: string;
+    key: string; // YouTube video key
+    name: string;
+    site: "YouTube" | "Vimeo"; // usually "YouTube"
+    size: number;
+    type: "Trailer" | "Teaser" | "Clip" | "Featurette";
+    official: boolean;
+    published_at: string;
+  }
+  
   
   export interface TrendingCardProps {
     movie: TrendingMovie;

@@ -1,15 +1,19 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchMovieDetails } from "../services/api";
-import { MovieDetails as MovieDetailsType } from "../interfaces/interfaces"; // if declared
+import { fetchMovieDetails, fetchMovieVideos } from "../services/api";
+import { MovieDetails as MovieDetailsType } from "../interfaces/interfaces";
+import { MovieVideo } from "../interfaces/interfaces";
 import { saveMovie, getSavedMovies } from "../services/appwrite";
 import { removeMovie } from "../services/appwrite";
 import { showAlert } from "../utils/alert";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);
+  const [trailerKey, setTrailerKey] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [alreadySaved, setAlreadySaved] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -28,6 +32,15 @@ const MovieDetails = () => {
           const saved = await getSavedMovies();
           const isSaved = saved.some((m) => String(m.movie_id) === String(id));
           setAlreadySaved(isSaved);
+        }
+
+        // Fetch Movie trailer
+        const videos = await fetchMovieVideos(id);
+        const trailer = videos.find(
+          (v) => v.type === "Trailer" && v.site === "YouTube"
+        );
+        if (trailer) {
+          setTrailerKey(trailer.key);
         }
       } catch (error) {
         console.error("Failed to load movie", error);
@@ -51,8 +64,8 @@ const MovieDetails = () => {
   if (!movie) return <div className="text-red-500 text-center mt-10">Movie not found.</div>;
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-10">
-      <div className="text-white p-6 max-w-5xl mx-auto bg-blue-500/10 rounded-[10px]">
+    <section className="min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-10">
+      <div className="text-white p-6 max-w-[80rem] mx-auto bg-blue-500/10 rounded-[10px]">
         <button
           onClick={() => navigate(-1)}
           className="btn btn-icon mb-5 w-full sm:w-60"
@@ -63,17 +76,29 @@ const MovieDetails = () => {
         <div 
           className="flex flex-col md:flex-row gap-6 "
         >
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            className="w-full md:w-72 rounded-lg shadow-lg"
-          />
+          <picture className="relative w-full md:w-[800px]">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+              className="w-full rounded-lg shadow-lg"
+            />
+              {trailerKey && (
+                <a
+                  href={`https://www.youtube.com/watch?v=${trailerKey}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-2 right-2 bg-accent p-3 text-white rounded-full shadow-md hover:bg-accent-dark transition"
+                >
+                  🎬 Watch Trailer
+                </a>
+              )}
+          </picture>
           <div>
-            <h1 className="text-3xl font-bold">{movie.title}</h1>
-            <p className="text-light-300 mt-2 italic">
+            <h1 className="text-3xl font-bold md:text-[40px]">{movie.title}</h1>
+            <p className="text-light-300 mt-2 italic md:text-[20px]">
               {movie.release_date?.split("-")[0]} • {movie.runtime} min
             </p>
-            <div className="mt-4 space-y-3">
+            <div className="mt-4 space-y-3 md:text-[20px]">
               <p>{movie.overview}</p>
               <p>
                 <strong>Genres:</strong>{" "}
@@ -103,9 +128,10 @@ const MovieDetails = () => {
                         setAlreadySaved(true);
                       });
                     }}
-                    className="bg-blue-500 text-white px-5 py-2 rounded mt-6"
+                    className="btn btn-icon p-[20px]"
                   >
-                    Save Movie
+                    Save Movie 
+                    <FontAwesomeIcon icon={faSave} />
                   </button>
                 )
               )}
