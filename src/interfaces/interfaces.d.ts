@@ -69,6 +69,9 @@ export interface TrendingMovie {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    videos?: {
+      results: MovieVideo[];
+    };
   }
 
   export interface MovieVideo {

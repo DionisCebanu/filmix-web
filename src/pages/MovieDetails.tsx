@@ -8,11 +8,13 @@ import { removeMovie } from "../services/appwrite";
 import { showAlert } from "../utils/alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { TrailerPopup } from "../components/ui/TrailerPopup";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);
+  const [showTrailer, setShowTrailer] = useState(false);
   const [trailerKey, setTrailerKey] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [alreadySaved, setAlreadySaved] = useState(false);
@@ -52,6 +54,16 @@ const MovieDetails = () => {
     loadMovie();
   }, [id]);
 
+
+  // Open trailer
+  const openTrailer = () => {
+    if (trailerKey) {
+      setShowTrailer(true);
+    }
+  };
+  
+  
+
   //Remove movie from the saved list
   const handleRemove = async () => {
     await removeMovie(movie!.id);
@@ -65,6 +77,10 @@ const MovieDetails = () => {
 
   return (
     <section className="min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-10">
+      {showTrailer && trailerKey && (
+        <TrailerPopup videoKey={trailerKey} onClose={() => setShowTrailer(false)} />
+      )}
+
       <div className="text-white p-6 max-w-[80rem] mx-auto bg-blue-500/10 rounded-[10px]">
         <button
           onClick={() => navigate(-1)}
@@ -83,14 +99,12 @@ const MovieDetails = () => {
               className="w-full rounded-lg shadow-lg"
             />
               {trailerKey && (
-                <a
-                  href={`https://www.youtube.com/watch?v=${trailerKey}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute bottom-2 right-2 bg-accent p-3 text-white rounded-full shadow-md hover:bg-accent-dark transition"
-                >
-                  🎬 Watch Trailer
-                </a>
+                 <button
+                    onClick={openTrailer}
+                    className="absolute bottom-2 right-2 bg-accent p-3 text-white rounded-full shadow-md hover:bg-accent-dark transition"
+                  >
+                    ▶ Watch Trailer
+                </button>
               )}
           </picture>
           <div>
